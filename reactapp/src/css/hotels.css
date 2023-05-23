@@ -1,0 +1,36 @@
+.hotelsMainDiv {
+    margin: 5% 10%;
+    padding: 20px;
+    height: max-content;
+    align-items: center;
+    border: 0px solid;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.hotelsDivPreview {
+    border: 2px solid;
+    border-radius: 30px;
+    border-color: white;
+    margin: 3% 3%;
+    padding: 20px;
+    display: inline-block;
+    height: max-content;
+    width: max-content;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.hotelsImg {
+    display: block;
+    width: 400px;
+    height: 325px;
+}
+
+.hotelsImgA {
+    font-size: 16px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.hotelsLink {
+    color: black;
+}

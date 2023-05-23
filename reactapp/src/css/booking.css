@@ -1,0 +1,98 @@
+.bookingMainDiv{
+    margin: 5% 30%;
+    padding: 20px;
+    height: max-content;
+    align-items: center;
+    border: 0px solid;
+    background:rgba(0,0,0,0.4);
+}
+
+.bookingForm{
+}
+
+.bookingLabel{
+    display: block;
+    margin-top: 3%;
+    color: white;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.bookingInput{
+    display: block;
+    width: 100%;
+    padding: 3%;
+    margin-top: 1%;
+    border: 2px solid gray;
+    border-radius: 10px;
+}
+.bookingInput:focus{
+    border: 2px solid black;
+    background-color: antiquewhite;
+}
+
+.bookingInput:disabled{
+    border: 2px solid black;
+    background-color: rgb(184, 183, 183);
+}
+
+.bookingSubmit{
+    align-self: center;
+    border: 0;
+    margin-top: 4%;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgba(220, 0, 0, 1);
+    background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.bookingSubmit:hover{
+    background-color: rgba(255, 0, 0, 1);
+}
+
+.bookingSubmit:active{
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6), inset 2px 2px 3px rgba(0, 0, 0, 0.6); 
+}
+
+.bookingBookings:hover {
+    background-color: rgba(255, 0, 0, 1);
+}
+
+.bookingBookings:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6), inset 2px 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.bookingBack{
+    align-self: center;
+    border: 0;
+    margin-top: 4%;
+    margin-left: 50%;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgba(220, 0, 0, 1);
+    background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.bookingBack:hover {
+    background-color: rgba(255, 0, 0, 1);
+}
+
+.bookingBack:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6), inset 2px 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.bookingLink{
+    text-decoration: none;
+    color: white;
+}

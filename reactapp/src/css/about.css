@@ -1,0 +1,86 @@
+.aboutMainDiv{
+    margin: 5% 5%;
+    margin-bottom: 1%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: max-content;
+    align-items: center;
+    border: 0px solid;
+    background:rgba(0,0,0,0.4);
+}
+
+.aboutH2{
+    font-size: 30px;
+    margin-left: 46%;
+    margin-top: 2%;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 400;
+}
+
+.aboutH3{
+    margin: 2% 7%;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 400;
+}
+
+.aboutImage{
+    margin-left: 7%;
+    width: 1010px;
+    height: 425px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-left: 0;
+  }
+  .social-icons>li {
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+  }
+  .social-icons a {
+    position: relative;
+    background-color: #eee;
+    display: block;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: background-color .3s ease-in-out;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: .25rem;
+  }
+  .social-icons a:hover {
+    background-color: #e0e0e0;
+  }
+  .social-icons a::before {
+    content: "";
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    left: .2rem;
+    top: .2rem;
+    background: transparent no-repeat center center;
+    background-size: 100% 100%;
+  }
+  .social-icons .social-icon-twitter::before {
+    background-image: url("../../public/images/twitter.png");
+  }
+  .social-icons .social-icon-fb::before {
+    background-image: url("../../public/images/facebook.png");
+  }
+  .social-icons .social-icon-vk::before {
+    background-image: url("../../public/images/vk.png");
+  }
+  .social-icons .social-icon-telegram::before {
+    background-image: url("../../public/images/telegram.png");
+  }
+  .social-icons .social-icon-instagram::before {
+    background-image: url("../../public/images/instagram.png");
+  }

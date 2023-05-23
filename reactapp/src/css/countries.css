@@ -1,0 +1,58 @@
+.countriesMainDiv {
+    margin: 5% 30%;
+    margin-bottom: 1%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: max-content;
+    align-items: center;
+    border: 0px solid;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.countriesUl {
+    padding: 0% 2%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.countriesButton {
+    display: flex;
+    border: 0;
+    margin-top: 0%;
+    margin-left: 40%;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgba(220, 0, 0, 1);
+    background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.countriesButton:hover {
+    background-color: rgba(255, 0, 0, 1);
+}
+
+.countriesButton:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6), inset 2px 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.countriesLink {
+    text-decoration: none;
+    color: #fff;
+}
+
+.countriesSelect {
+    width: 120px;
+    height: 30px;
+    border: 1px solid #999;
+    font-size: 18px;
+    color: #1c87c9;
+    background-color: #eee;
+    border-radius: 5px;
+    box-shadow: 4px 4px #ccc;
+}

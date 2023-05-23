@@ -1,0 +1,75 @@
+.tourMainDiv{
+    display: block;
+    margin: 5% 5%;
+    margin-bottom: 1%;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-bottom: 30px;
+    height: max-content;
+    border: 0px solid;
+    background:rgba(0,0,0,0.4);
+}
+
+.tourH2{
+    font-size: 30px;
+    margin: 0px 0px 20px 30px;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 400;
+}
+
+.tourP{
+    margin: 0 30px 0 0;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 100;
+}
+.tourLink {
+    margin: 0;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 100;
+}
+
+.tourImage{
+    width: 510px;
+    height: 285px;
+}
+
+.tourDivInfo{
+}
+
+.tourDivImage{
+    float: left;
+    height: max-content;
+    padding: 0 20px;
+}
+
+.tourBookedButton{
+    display: flex;
+    border: 0;
+    margin-top: 3%;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgba(220, 0, 0, 1);
+    background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.tourBookedButton:hover {
+    background-color: rgba(255, 0, 0, 1);
+}
+
+.tourBookedButton:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6), inset 2px 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.tourBookedLink{
+    text-decoration: none;
+    color: #fff;
+}

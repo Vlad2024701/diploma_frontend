@@ -1,0 +1,47 @@
+.userBookedMainDiv{
+    margin: 5% 5%;
+    margin-bottom: 1%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: max-content;
+    align-items: center;
+    border: 0px solid;
+    background:rgba(0,0,0,0.4);
+}
+
+.userBookedUl{
+    padding: 0% 2%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.userBookedButton{
+    display: flex;
+    border: 0;
+    margin-top: 0%;
+    margin-left: 5%;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgba(220, 0, 0, 1);
+    background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.userBookedButton:hover {
+    background-color: rgba(255, 0, 0, 1);
+}
+
+.userBookedButton:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6), inset 2px 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.userBookedLink{
+    text-decoration: none;
+    color: #fff;
+}

@@ -1,0 +1,66 @@
+.headerAuth {
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-decoration: none;
+}
+
+.headerMain{
+    position: relative;
+}
+
+/* .headerAuthDiv {
+    width: max-content;
+    padding: 10px 20px;
+    position: relative;
+    align-items: center;
+    left: 90%;
+    background-color: antiquewhite;
+    border-radius: 50px;
+    border: 2px solid aqua;
+} */
+
+.headerAuth:hover{
+    color: orange;
+}
+
+.headerMainMenuDiv{
+    margin-top: 10px;
+    height: 80px;
+    align-items: center;
+    border: 0px solid;
+    border-radius: 20px;
+    background:rgba(0,0,0,0.5);
+}
+
+.headerLogoDiv{
+    width: max-content;
+    height: max-content;
+    display: inline-block;
+    padding: 10px 20px;
+    align-items: center;
+}
+
+.headerMenuDiv{
+    left: 25%;
+    width: max-content;
+    height: max-content;
+    display: inline-block;
+    position: relative;
+    padding: 10px 20px;
+    align-items: center;
+}
+
+
+.headerLogoA {
+  cursor: default;
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+    font-style: italic;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.headerLogoLink {
+    text-decoration: none;
+    color: white;
+}
