@@ -1,54 +1,67 @@
 import '../css/index.css';
 import { Link } from 'react-router-dom';
 import Header from '../Header/header'
+import React, {useEffect, useState} from "react";
+
 
 function Sign() {
-    function kok() {
-        var btnSI = document.querySelector('.btn-signin-active');
-        var btnSU = document.querySelector('.btn-signup-active')
-        btnSI.addEventListener("click", changeSignIn);
-        btnSU.addEventListener("click", changeSignUp);
 
-        function changeSignIn() {
-            let signIn = document.querySelector('.signin');
-            let signUp = document.querySelector('.signup');
+    const [signin_active, setSignInItem] = useState(`signin_active`)
+    const [signup_inactive, setSignUpItem] = useState(`signup_inactive`)
 
-            let formSignIn = document.querySelector('.fsi');
-            formSignIn.classList.remove('form-signin-left');
-            formSignIn.classList.add('form-signin');
-
-            let formSignUp = document.querySelector('.fsu');
-            formSignUp.classList.remove('form-signup');
-            formSignUp.classList.add('form-signup-left');
-
-            if (signIn.classList[1] === 'signin-inactive') {
-                signIn.classList.remove('signin-inactive');
-                signIn.classList.add('signin-active');
-                signUp.classList.remove('signup-active');
-                signUp.classList.add('signup-inactive');
+    function changeSignIn(){
+        setSignInItem(prevCount =>{
+            if (prevCount === `signin_active`) {
+                return 'signin_active';
+            } else if (prevCount === `signin_inactive`) {
+                setSignUpItem(`signup_inactive`);
+                let formSignUp = document.querySelector('.fsu');
+                formSignUp.classList.remove('form-signup');
+                formSignUp.classList.add('form-signup-left');
+                let formSignIn = document.querySelector('.fsi');
+                formSignIn.classList.remove('form-signin-left');
+                formSignIn.classList.add('form-signin');
+                return 'signin_active';
             }
-        }
+        })
+    };
 
-        function changeSignUp() {
-            let signIn = document.querySelector('.signin');
-            let signUp = document.querySelector('.signup');
-
-            let formSignIn = document.querySelector('.fsi');
-            formSignIn.classList.remove('form-signin');
-            formSignIn.classList.add('form-signin-left');
-
-            let formSignUp = document.querySelector('.fsu');
-            formSignUp.classList.remove('form-signup-left');
-            formSignUp.classList.add('form-signup');
-
-            if (signUp.classList[1] === 'signup-inactive') {
-                signIn.classList.remove('signin-active');
-                signIn.classList.add('signin-inactive');
-                signUp.classList.remove('signup-inactive');
-                signUp.classList.add('signup-active');
+    function changeSignUp(){
+        setSignUpItem(prevCount =>{
+            if (prevCount === `signup_active`) {
+                return 'signup_active';
+            } else if (prevCount === `signup_inactive`) {
+                setSignInItem(`signin_inactive`);
+                let formSignIn = document.querySelector('.fsi');
+                formSignIn.classList.remove('form-signin');
+                formSignIn.classList.add('form-signin-left');
+                let formSignUp = document.querySelector('.fsu');
+                formSignUp.classList.remove('form-signup-left');
+                formSignUp.classList.add('form-signup');
+                return 'signup_active';
             }
-        }
+        })
+    };
+
+    //trying to get data from controllers
+    const [message, getMessage] = useState("");
+    useEffect(() => {
+        fetch('http://localhost:5215/api/user/test')
+        .then(response => response.text())
+        .then(message => {
+            getMessage(message);
+        });
+    }, [])
+
+    //func
+    function componentGetUser() {
+        fetch('http://localhost:5215/api/user/test')
+        .then(response => response.text())
+        .then(data => {
+            console.log(data);
+        });
     }
+
 
     return (
         <>
@@ -57,8 +70,8 @@ function Sign() {
                 <div className="frame">
                     <div className="nav">
                         <ul className="links">
-                            <li className="signin signin-active"><a onClick={kok} className="btn-signin-active">Sign in</a></li>
-                            <li className="signup signup-inactive"><a onClick={kok} className="btn-signup-active">Sign up </a></li>
+                            <li className={`${signin_active}`} onClick={changeSignIn}><a className="btn-signin-active">Sign in</a></li>
+                            <li className={`${signup_inactive}`} onClick={changeSignUp}><a className="btn-signup-active">Sign up </a></li>
                         </ul>
                     </div>
                     <div>
@@ -92,6 +105,8 @@ function Sign() {
                     </div>
                 </div>
                 <Link to='/userBooked'>Бронирования</Link>
+                <h2 className='some' >{message}</h2>
+                <button className='someButton' onClick={componentGetUser}>hlafdasdas </button>
             </div>
         </>
     );

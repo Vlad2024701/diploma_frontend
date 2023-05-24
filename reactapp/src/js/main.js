@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import '../css/main.css'
 
 function Main() {
+
+    var currentDate = new Date();
+    currentDate.setDate(currentDate.getDate());
+    var date = currentDate.toISOString().substring(0,10);
     return (
         <>
             <Header />
@@ -21,7 +25,7 @@ function Main() {
                                 <label className="mainLabel" htmlFor="email">Тур</label>
                             </div>
                             <div className="mainDivInput mainDivInputFloating">
-                                <input className="mainInput" type="date" />
+                                <input className="mainInput" type="date" min={date}/>
                                 <label className="mainLabel" htmlFor="email">Дата</label>
                             </div>
                             <div className="mainDivInput mainDivInputFloating">
