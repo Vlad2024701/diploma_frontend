@@ -43,13 +43,34 @@ function Sign() {
         })
     };
 
-    //trying to get data from controllers
-    const [message, getMessage] = useState("");
+    // trying to get data from controllers
+    // const [message, getMessage] = useState("");
+    // useEffect(() => {
+    //     fetch('http://127.0.0.1:5215/api/user/getUsers')
+    //     .then(response => response.json())
+    //     .then(message => {
+    //         getMessage({
+    //             Id: message.Id,
+    //             Login: message.Login,
+    //             Password: message.Password
+    //         });
+    //     });
+    // }, [])
+    const [message, setMessage] = useState("");
     useEffect(() => {
-        fetch('http://localhost:5215/api/user/test')
-        .then(response => response.text())
+        fetch('http://127.0.0.1:5215/api/user/getUsers')
+        .then(response => response.json())
         .then(message => {
-            getMessage(message);
+            console.log(message);
+        });
+    }, [])
+
+    const [items, setItems] = useState([]);
+    useEffect(() => {
+        fetch('http://127.0.0.1:5215/api/user/getUsers')
+        .then(response => response.json())
+        .then(items => {
+            setItems(items);
         });
     }, [])
 
@@ -61,6 +82,14 @@ function Sign() {
             console.log(data);
         });
     }
+
+    // const dataFetch = async() => {
+    //     const data = await(
+    //         await fetch(
+    //             "http://localhost:5215/api/user/test"
+    //         )
+    //     ).json();
+    // }
 
 
     return (
@@ -105,7 +134,8 @@ function Sign() {
                     </div>
                 </div>
                 <Link to='/userBooked'>Бронирования</Link>
-                <h2 className='some' >{message}</h2>
+                {/* <h2>{items && items[0].login}</h2> */}
+                {items.map((item)=> <h2>{item.login}</h2>)}
                 <button className='someButton' onClick={componentGetUser}>hlafdasdas </button>
             </div>
         </>
