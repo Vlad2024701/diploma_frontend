@@ -5,7 +5,8 @@
     padding-top: 30px;
     padding-left: 30px;
     padding-bottom: 30px;
-    height: max-content;
+    height: min-content;
+    min-height: 400px;
     border: 0px solid;
     background:rgba(0,0,0,0.4);
 }
@@ -37,6 +38,7 @@
 }
 
 .tourDivInfo{
+    height: min-content;
 }
 
 .tourDivImage{

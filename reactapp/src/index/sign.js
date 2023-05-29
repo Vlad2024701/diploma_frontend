@@ -1,7 +1,9 @@
 import '../css/index.css';
-import { Link } from 'react-router-dom';
+import { Link, json } from 'react-router-dom';
 import Header from '../Header/header'
 import React, {useEffect, useState} from "react";
+import { event } from 'jquery';
+import {StoreContext}  from '../utils/store';
 
 
 function Sign() {
@@ -43,27 +45,8 @@ function Sign() {
         })
     };
 
-    // trying to get data from controllers
-    // const [message, getMessage] = useState("");
-    // useEffect(() => {
-    //     fetch('http://127.0.0.1:5215/api/user/getUsers')
-    //     .then(response => response.json())
-    //     .then(message => {
-    //         getMessage({
-    //             Id: message.Id,
-    //             Login: message.Login,
-    //             Password: message.Password
-    //         });
-    //     });
-    // }, [])
-    const [message, setMessage] = useState("");
-    useEffect(() => {
-        fetch('http://127.0.0.1:5215/api/user/getUsers')
-        .then(response => response.json())
-        .then(message => {
-            console.log(message);
-        });
-    }, [])
+
+    //components
 
     const [items, setItems] = useState([]);
     useEffect(() => {
@@ -74,7 +57,7 @@ function Sign() {
         });
     }, [])
 
-    //func
+
     function componentGetUser() {
         fetch('http://localhost:5215/api/user/test')
         .then(response => response.text())
@@ -83,13 +66,25 @@ function Sign() {
         });
     }
 
-    // const dataFetch = async() => {
-    //     const data = await(
-    //         await fetch(
-    //             "http://localhost:5215/api/user/test"
-    //         )
-    //     ).json();
-    // }
+    const[login, setLogin] = useState(""); 
+    const[password, setPassword] = useState("");
+    const {userStore} = React.useContext(StoreContext); 
+
+    function componentAuthorize(event) {
+        event.preventDefault()
+        console.log(login, password);
+        fetch('http://localhost:5215/api/user/authorize',
+        {
+                method: 'POST',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({login: login, password: password})
+        })
+        .then(response => response.text())
+        .then(gotUser => {
+            console.log(gotUser);
+            userStore[1](JSON.parse(gotUser));
+        });
+    }
 
 
     return (
@@ -104,13 +99,15 @@ function Sign() {
                         </ul>
                     </div>
                     <div>
-                        <form className="fsi form-signin" action="" method="post" name="form">
+                        <form className="fsi form-signin" action="" method="post" name="form" onSubmit={componentAuthorize}>
                             <label className='indexLabel'>Username</label>
-                            <input className="form-styling" type="text" name="username" placeholder="" />
+                            <input className="form-styling" type="text" name="login" placeholder=""
+                            value={login} onChange={(e)=>setLogin(e.target.value)}/>
                             <label className='indexLabel'>Password</label>
-                            <input className="form-styling" type="password" name="password" placeholder="" />
+                            <input className="form-styling" type="password" name="password" placeholder=""
+                            value={password} onChange={(e)=>setPassword(e.target.value)}/>
                             <div>
-                                <input className="btn-signin" type="submit" value="Sign in" />
+                                <input className="btn-signin" type="submit" value="Sign in"/>
                             </div>
                         </form>
 

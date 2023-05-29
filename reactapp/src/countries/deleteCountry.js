@@ -2,10 +2,9 @@ import Header from "../Header/header";
 import { Link, useParams } from 'react-router-dom';
 import '../css/countries.css'
 import React, { useEffect, useState } from "react";
-import { event } from "jquery";
 
 
-function Countries() {
+function CountriesDelete() {
 
     const [countries, setCountry] = useState([]);
     useEffect(() => {
@@ -14,8 +13,6 @@ function Countries() {
             .then(countries => {
                 console.log(countries);
                 setCountry(countries);
-                if(countries.length > 0)
-                    setSelectedCountry(countries[0].id)
             });
     }, [])
 
@@ -28,9 +25,6 @@ function Countries() {
                 setCities(cities);
             });
     }, [])
-
-    const [selectedCountry, setSelectedCountry] = useState(null);
-
 
     function getCitiesFromCountry(){
 
@@ -54,27 +48,24 @@ function Countries() {
                 <hr />
                 <ul className="countriesUl">
                     <li className="countriesLi">
-                        <select className="countriesSelect" onChange={(event)=>{setSelectedCountry(event.target.value)}}>
+                        <select className="countriesSelect">
                             {countries.map((country) =>
-                                <option value={country.id}>{country.name}</option>
+                                <option>{country.name}</option>
                             )}
                         </select>
                     </li>
                     <li className="countriesLi">
                         <select className="citiesSelect">
-                            {cities.filter((city)=>city.countryId == selectedCountry)
-                            .map((city) =>
+                            {cities.map((city) =>
                                 <option>{city.name}</option>
                             )}
                         </select>
                     </li>
                 </ul>
-                <button className="countriesButton" type="button"><Link to='/main' className="countriesLink">Назад</Link></button>
-                <button className="countriesButton" type="button"><Link to='/countriesAdd' className="countriesLink">Добавить</Link></button>
-                <button className="countriesButton" type="button"><Link to='/countriesDelete' className="countriesLink">Удалить</Link></button>
+                <button className="countriesButton" type="button"><Link to='/countries' className="countriesLink">Назад</Link></button>
             </div>
         </>
     );
 }
 
-export default Countries;
+export default CountriesDelete;

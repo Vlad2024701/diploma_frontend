@@ -9,7 +9,7 @@
 }
 
 .hotelCarousel{
-    height: 800px;
+    height: max-content;
     width: 800px;
     margin-left: 10%;
 }
@@ -19,7 +19,7 @@
 }
 
 .hotelInfoImg{
-    height: 500px;
+    height: 400px;
     width: 800px;
     display: block;
     margin-left: auto;
@@ -31,6 +31,26 @@
     color: white;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: 300;
+}
+
+.hotelP{
+    margin-left: 5%;
+    margin: 16px 30px 16px 110px;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 100;
+}
+
+.hotelPGet{
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 100;
+}
+.hotelLinkRoom{
+    color: rgb(11, 221, 200);
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 100;
+    text-decoration: none;
 }
 
 

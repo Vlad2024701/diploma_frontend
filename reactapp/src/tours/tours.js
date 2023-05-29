@@ -1,27 +1,72 @@
 import Header from "../Header/header";
 import { Link } from 'react-router-dom';
 import '../css/tours.css'
+import React, { useEffect, useState } from "react";
 
 function Tours() {
+
+    const [cities, setCities] = useState([]);
+    useEffect(() => {
+        fetch('http://127.0.0.1:5215/api/city/getCities')
+            .then(response => response.json())
+            .then(cities => {
+                setCities(cities);
+            });
+    }, [])
+
+
+    const [tours, setTours] = useState([]);
+    const [displayedTours, setDisplayedTours] = useState([]);
+
+    useEffect(() => {
+        fetch('http://127.0.0.1:5215/api/tour/getTours')
+            .then(response => response.json())
+            .then(tours => {
+                setTours(tours);
+                setDisplayedTours(tours);
+            });
+    }, [])
+
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedCity, setSelectedCity] = useState(null);
+    const [selectedCountPassengers, setSelectedCountPassengers] = useState(null);
+    useEffect(() => {
+        if (tours.length > 0) {
+            var toursL = [...tours];
+            if (selectedCity) {
+                console.log(selectedCity);
+                toursL = toursL.filter((tour) => tour.cityId == selectedCity);
+                // if (selectedDate) {
+                //     console.log(selectedCity);
+                //     toursL = toursL.filter((tour) => tour.tourTimeStart.toISOString().substring(0, 10) == selectedDate);
+                // }
+            }
+            setDisplayedTours(toursL);
+        }
+    }, [selectedDate, selectedCity, selectedCountPassengers])
+
+    var currentDate = new Date();
+    currentDate.setDate(currentDate.getDate());
+    var date = currentDate.toISOString().substring(0, 10);
+
     return (
         <>
             <Header />
-            <div className="toursSearching">    
+            <div className="toursSearching">
                 <h3 className="toursH3">Поиск туров</h3>
                 <div>
                     <form className="toursForm" action="" method="post" name="form">
                         <div className="toursDivFields">
                             <div className="toursDivInput toursDivInputFloating">
-                                <select className="toursInput" name="list1">
-                                    <option>Куда</option>
-                                    <option>Финляндия</option>
-                                    <option>Швеция</option>
-                                    <option>Америка</option>
+                                <select className="toursInput" name="list1"
+                                    onChange={(event) => { event.target.value == -1 ? setSelectedCity(null) : setSelectedCity(event.target.value) }}>
+                                    <option value={-1}>Куда</option>
+                                    {cities.map((city) => <option value={city.id}>{city.name}</option>)};
                                 </select>
                                 <label className="toursLabel" htmlFor="email">Тур</label>
                             </div>
                             <div className="toursDivInput toursDivInputFloating">
-                                <input className="toursInput" type="date" />
+                                <input className="toursInput" type="date" min={date} />
                                 <label className="toursLabel" htmlFor="email">Дата</label>
                             </div>
                             <div className="toursDivInput toursDivInputFloating">
@@ -34,44 +79,21 @@ function Tours() {
             </div>
             <div className="toursMainDiv">
                 <h2 className="toursH2">Все маршруты (Результаты поиска)</h2>
-                <Link to='/tour' className="toursLink">
-                    <div className="toursDivPreview">
-                        <a className="toursImgA">Тур в италию</a>
-                        <img className="toursImg" src='/images/tour1.jpg' />
-                        <a className="toursImgA">
-                            <a className="toursImgA">Даты:</a> <a>С 12:06:2023 по 16:06:2023</a><br />
-                            <a className="toursImgA">Отправление:</a> <a>В 14:30 по мск</a><br />
-                            <a className="toursImgA">Стоимость:</a> <a>1000 BYN</a><br />
-                        </a>
-                    </div>
-                </Link>
-                <div className="toursDivPreview">
-                    <a className="toursImgA">Тур в италию</a>
-                    <img className="toursImg" src='/images/tour1.jpg' />
-                    <a className="toursImgA">
-                        <a className="toursImgA">Даты:</a> <a>С 12:06:2023 по 16:06:2023</a><br />
-                        <a className="toursImgA">Отправление:</a> <a>В 14:30 по мск</a><br />
-                        <a className="toursImgA">Стоимость:</a> <a>1000 BYN</a><br />
-                    </a>
-                </div>
-                <div className="toursDivPreview">
-                    <a className="toursImgA">Тур в италию</a>
-                    <img className="toursImg" src='/images/tour1.jpg' />
-                    <a className="toursImgA">
-                        <a className="toursImgA">Даты:</a> <a>С 12:06:2023 по 16:06:2023</a><br />
-                        <a className="toursImgA">Отправление:</a> <a>В 14:30 по мск</a><br />
-                        <a className="toursImgA">Стоимость:</a> <a>1000 BYN</a><br />
-                    </a>
-                </div>
-                <div className="toursDivPreview">
-                    <a className="toursImgA">Тур в италию</a>
-                    <img className="toursImg" src='/images/tour1.jpg' />
-                    <a className="toursImgA">
-                        <a className="toursImgA">Даты:</a> <a>С 12:06:2023 по 16:06:2023</a><br />
-                        <a className="toursImgA">Отправление:</a> <a>В 14:30 по мск</a><br />
-                        <a className="toursImgA">Стоимость:</a> <a>1000 BYN</a><br />
-                    </a>
-                </div>
+                {displayedTours.map((tour) =>
+                    <Link to={`/tour/${tour.id}`} className="toursLink">
+                        <div className="toursDivPreview">
+                            <a className="toursImgA">{tour.tourName}</a>
+                            <img className="toursImg" src='/images/tour1.jpg' />
+                            <a className="toursImgA">
+                                <a className="toursImgA">Даты:</a>
+                                <a> С {tour.tourTimeStart.substring(0, 10)} по {tour.tourTimeEnd.substring(0, 10)}</a>
+                                <br />
+                                <a className="toursImgA">Отправление:</a> <a>В {tour.departureTime} по мск</a><br />
+                                <a className="toursImgA">Стоимость:</a> <a>{tour.cost} BYN</a><br />
+                            </a>
+                        </div>
+                    </Link>
+                )}
             </div>
         </>
     );
