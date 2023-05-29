@@ -79,11 +79,74 @@ function Sign() {
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({login: login, password: password})
         })
-        .then(response => response.text())
+        .then((response) => {
+            if (response.ok) {
+                return response.text();
+            }
+            throw new Error('Неверный логин или пароль');
+        })
         .then(gotUser => {
             console.log(gotUser);
+            alert(`Здравствуйте, ${login}`);
             userStore[1](JSON.parse(gotUser));
+        })
+        .catch((error) => {
+            alert(error.message);
         });
+    }
+
+
+    
+    const[loginRegister, setLoginRegister] = useState(""); 
+    const[passwordRegister, setPasswordRegister] = useState("");
+    const[confirmPasswordRegister, setConfirmPasswordRegister] = useState("");
+    
+    const[nameRegister, setNameRegister] = useState(""); 
+    const[emailRegister, setEmailRegister] = useState("");
+    const[roleRegister, setRoleRegister] = useState("");
+    function componentRegister(event) {
+        event.preventDefault();
+        setRoleRegister("user");
+        console.log(login, password, passwordRegister, nameRegister, emailRegister);
+        if (passwordRegister != confirmPasswordRegister){
+            alert('Неверные данные для регистрации')
+            showError();
+            function showError(){
+                var errorSpan = document.createElement("span");
+                var errorMessage = document.createTextNode("Пароли не совпадают!");
+
+                errorSpan.appendChild(errorMessage);
+                errorSpan.className = "errorMsg";
+                
+                var fieldLabel = document.querySelector('confirmpassword').previousSibling;
+
+                while (fieldLabel.nodeName.toLowerCase() != "label") {
+                    fieldLabel = fieldLabel.previousSibling;
+                }
+                fieldLabel.appendChild(errorSpan);
+            };
+        }
+
+        fetch('http://localhost:5215/api/user/register',
+        {
+                method: 'POST',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({login: loginRegister, password: passwordRegister, name: nameRegister, email: emailRegister, role: roleRegister})
+        })
+        .then((response) => {
+            if (response.ok) {
+                return response.text();
+            }
+            throw new Error('Неверные данные для регистрации (бэк)');
+        })
+        .then(goteUserRegister => {
+            console.log(goteUserRegister);
+            alert(`Вы зарегестрировались!`);
+        })
+        .catch((error) => {
+            alert(error.message);
+        });
+
     }
 
 
@@ -111,16 +174,23 @@ function Sign() {
                             </div>
                         </form>
 
-                        <form className="fsu form-signup-left" action="" method="post" name="form">
+                        <form className="fsu form-signup-left" action="" method="post" name="form" onSubmit={componentRegister}>
                             <label className='indexLabel'>Full name</label>
-                            <input className="form-styling" type="text" name="fullname" placeholder="" />
+                            <input className="form-styling" type="text" name="fullname" placeholder="" 
+                            value={nameRegister} onChange={(e)=>setNameRegister(e.target.value)} />
+                            <label className='indexLabel'>Login</label>
+                            <input className="form-styling" type="text" name="loginRegister" placeholder="" 
+                            value={loginRegister} onChange={(e)=>setLoginRegister(e.target.value)} />
                             <label className='indexLabel'>Email</label>
-                            <input className="form-styling" type="text" name="email" placeholder="" />
+                            <input className="form-styling" type="text" name="email" placeholder="" 
+                            value={emailRegister} onChange={(e)=>setEmailRegister(e.target.value)} />
                             <label className='indexLabel'>Password</label>
-                            <input className="form-styling" type="password" name="password" placeholder="" />
+                            <input className="form-styling" type="password" name="password" placeholder=""
+                            value={passwordRegister} onChange={(e)=>setPasswordRegister(e.target.value)} />
                             <label className='indexLabel'>Confirm password</label>
-                            <input className="form-styling" type="password" name="confirmpassword" placeholder="" />
-                            <a className="btn-signup">Sign Up</a>
+                            <input className="form-styling" type="password" name="confirmpassword" placeholder=""
+                            value={confirmPasswordRegister} onChange={(e)=>setConfirmPasswordRegister(e.target.value)}  />
+                            <input className="btn-signup" type="submit" value="Sign up"/>
                         </form>
 
                         <div className="success">
@@ -130,10 +200,6 @@ function Sign() {
                         </div>
                     </div>
                 </div>
-                <Link to='/userBooked'>Бронирования</Link>
-                {/* <h2>{items && items[0].login}</h2> */}
-                {items.map((item)=> <h2>{item.login}</h2>)}
-                <button className='someButton' onClick={componentGetUser}>hlafdasdas </button>
             </div>
         </>
     );
