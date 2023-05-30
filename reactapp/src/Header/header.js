@@ -17,9 +17,9 @@ function Header() {
                         <ul>
                             <li className="headerMenuLi"><Link to='/tours' className="headerAuth">Туры</Link></li>
                             <li className="headerMenuLi"><Link to='/about' className="headerAuth">О нас</Link></li>
-                            {/* {user.role == 'admin' ? <li className="headerMenuLi"><Link to='/user' className="headerAuth">Страны</Link></li> : ''} */}
+                            {user ? user.role == 'admin' ? <li className="headerMenuLi"><Link to='/countries' className="headerAuth">Страны</Link></li> : '' : ''}
                             <li className="headerMenuLi"><Link to='/hotels' className="headerAuth">Отели</Link></li>
-                            {/* {user.role == 'user' || user.role =='admin' ? <li className="headerMenuLi"><Link to='/user' className="headerAuth">Личный кабинет</Link></li> : ''} */}
+                            {user ? user.role == 'user' || user.role =='admin' ? <li className="headerMenuLi"><Link to='/user' className="headerAuth">Личный кабинет</Link></li> : '' : ''}
                             <li className="headerMenuLi"><Link to='/register' className="headerAuth">Войти</Link></li>
                         </ul>
                     </div>

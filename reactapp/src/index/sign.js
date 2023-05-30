@@ -99,7 +99,6 @@ function Sign() {
     
     const[loginRegister, setLoginRegister] = useState(""); 
     const[passwordRegister, setPasswordRegister] = useState("");
-    const[confirmPasswordRegister, setConfirmPasswordRegister] = useState("");
     
     const[nameRegister, setNameRegister] = useState(""); 
     const[emailRegister, setEmailRegister] = useState("");
@@ -108,24 +107,6 @@ function Sign() {
         event.preventDefault();
         setRoleRegister("user");
         console.log(login, password, passwordRegister, nameRegister, emailRegister);
-        if (passwordRegister != confirmPasswordRegister){
-            alert('Неверные данные для регистрации')
-            showError();
-            function showError(){
-                var errorSpan = document.createElement("span");
-                var errorMessage = document.createTextNode("Пароли не совпадают!");
-
-                errorSpan.appendChild(errorMessage);
-                errorSpan.className = "errorMsg";
-                
-                var fieldLabel = document.querySelector('confirmpassword').previousSibling;
-
-                while (fieldLabel.nodeName.toLowerCase() != "label") {
-                    fieldLabel = fieldLabel.previousSibling;
-                }
-                fieldLabel.appendChild(errorSpan);
-            };
-        }
 
         fetch('http://localhost:5215/api/user/register',
         {
@@ -146,7 +127,11 @@ function Sign() {
         .catch((error) => {
             alert(error.message);
         });
+    }
 
+    function componentSignOut(){
+        userStore[1](-1);
+        alert(`Вы вышли из аккаунта`);
     }
 
 
@@ -172,6 +157,9 @@ function Sign() {
                             <div>
                                 <input className="btn-signin" type="submit" value="Sign in"/>
                             </div>
+                            <div>
+                                <input className="btn-signout" type="button" value="Sign out" onClick={componentSignOut}/>
+                            </div>
                         </form>
 
                         <form className="fsu form-signup-left" action="" method="post" name="form" onSubmit={componentRegister}>
@@ -187,9 +175,6 @@ function Sign() {
                             <label className='indexLabel'>Password</label>
                             <input className="form-styling" type="password" name="password" placeholder=""
                             value={passwordRegister} onChange={(e)=>setPasswordRegister(e.target.value)} />
-                            <label className='indexLabel'>Confirm password</label>
-                            <input className="form-styling" type="password" name="confirmpassword" placeholder=""
-                            value={confirmPasswordRegister} onChange={(e)=>setConfirmPasswordRegister(e.target.value)}  />
                             <input className="btn-signup" type="submit" value="Sign up"/>
                         </form>
 

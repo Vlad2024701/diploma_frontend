@@ -2,6 +2,7 @@ import Header from "../Header/header";
 import { Link, useParams } from 'react-router-dom';
 import '../css/countries.css'
 import React, { useEffect, useState } from "react";
+import {StoreContext}  from '../utils/store';
 
 
 function CountriesDelete() {
@@ -13,6 +14,8 @@ function CountriesDelete() {
             .then(countries => {
                 console.log(countries);
                 setCountry(countries);
+                if(countries.length > 0)
+                    setSelectedCountry(countries[0].id)
             });
     }, [])
 
@@ -23,12 +26,63 @@ function CountriesDelete() {
             .then(cities => {
                 console.log(cities);
                 setCities(cities);
+                if(cities.length > 0)
+                    setSelectedCity(cities[0].id)
             });
     }, [])
 
-    function getCitiesFromCountry(){
+    const [selectedCountry, setSelectedCountry] = useState(null);
+    const [selectedCity, setSelectedCity] = useState(null);
 
+    const {userStore} = React.useContext(StoreContext); 
+    const [user, setUser] = userStore;
+
+    function componentDeleteCity(event) {
+        event.preventDefault()
+        console.log(selectedCity);
+        fetch(`http://localhost:5215/api/city/${selectedCity}/deleteCity`,
+        {
+                method: 'DELETE',
+                headers: {"Content-Type": "application/json"}
+        })
+        .then((response) => {
+            if (response.ok) {
+                return response.text();
+            }
+            throw new Error('Что-то пошло не так');
+        })
+        .then(gotUser => {
+            console.log(gotUser);
+            alert(`Город удален успешно!`);
+        })
+        .catch((error) => {
+            alert(error.message);
+        });
     }
+
+    function componentDeleteCountry(event) {
+        event.preventDefault()
+        console.log(selectedCountry);
+        fetch(`http://localhost:5215/api/country/${selectedCountry}/deleteCountry`,
+        {
+                method: 'DELETE',
+                headers: {"Content-Type": "application/json"}
+        })
+        .then((response) => {
+            if (response.ok) {
+                return response.text();
+            }
+            throw new Error('Что-то пошло не так');
+        })
+        .then(gotUser => {
+            console.log(gotUser);
+            alert(`Страна удалена успешно!`);
+        })
+        .catch((error) => {
+            alert(error.message);
+        });
+    }
+
 
     if (!countries && !cities) return (
         <>
@@ -48,21 +102,24 @@ function CountriesDelete() {
                 <hr />
                 <ul className="countriesUl">
                     <li className="countriesLi">
-                        <select className="countriesSelect">
+                        <select className="countriesSelect" onChange={(event)=>{setSelectedCountry(event.target.value)}}>
                             {countries.map((country) =>
-                                <option>{country.name}</option>
+                                <option value={country.id}>{country.name}</option>
                             )}
                         </select>
                     </li>
                     <li className="countriesLi">
-                        <select className="citiesSelect">
-                            {cities.map((city) =>
-                                <option>{city.name}</option>
+                        <select className="citiesSelect" onChange={(event)=>{setSelectedCity(event.target.value); console.log(selectedCity)}}>
+                            {cities.filter((city)=>city.countryId == selectedCountry)
+                            .map((city) =>
+                                <option value={city.id}>{city.name}</option>
                             )}
                         </select>
                     </li>
                 </ul>
                 <button className="countriesButton" type="button"><Link to='/countries' className="countriesLink">Назад</Link></button>
+                <button className="countriesButton" type="button" onClick={componentDeleteCity}>Удалить город</button>
+                <button className="countriesButton" type="button" onClick={componentDeleteCountry}>Удалить страну со всеми городами</button>
             </div>
         </>
     );

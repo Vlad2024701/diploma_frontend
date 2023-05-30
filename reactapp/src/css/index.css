@@ -238,6 +238,18 @@ li {
   background-color: #1059FF;
 }
 
+.btn-signout {
+  float: left;
+  width: 100%;
+  height: 35px;
+  border: none;
+  border-radius: 20px;
+  margin-top: 15px;
+  font-size: 13px;
+  text-transform: uppercase;
+  background-color: #1059FF;
+}
+
 .btn-animate {
   float: left;
   font-weight: 700;
@@ -267,7 +279,7 @@ li {
   background-color: rgba(255,255,255,1);
 }
 
-a.btn-signup:hover, .btn-signin:hover {
+a.btn-signup:hover, .btn-signin:hover, .btn-signout:hover {
   cursor: pointer;
   background-color: #0F4FE6;
   transition: background-color .5s;

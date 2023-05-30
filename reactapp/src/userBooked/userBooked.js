@@ -34,7 +34,7 @@ function UserBooked() {
                     <li className="userBookedLi">Places</li>
                 </ul>
             </div>
-            <button className="userBookedButton" type="button"><Link to='/user' className="userBookedLink">Назад</Link></button>
+            <button className="userBookedButton" type="button"><Link to='javascript:history.back()' className="userBookedLink">Назад</Link></button>
         </>
     );
 }
