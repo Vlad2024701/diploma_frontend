@@ -105,13 +105,15 @@ function CountriesDelete() {
                 <ul className="countriesUl">
                     <li className="countriesLi">
                         <select className="countriesSelect" onChange={(event)=>{setSelectedCountry(event.target.value)}}>
+                        <option>Выберите страну</option>
                             {countries.map((country) =>
                                 <option value={country.id}>{country.name}</option>
                             )}
                         </select>
                     </li>
                     <li className="countriesLi">
-                        <select className="citiesSelect" onChange={(event)=>{setSelectedCity(event.target.value); console.log(selectedCity)}}>
+                        <select className="citiesSelect" onChange={(event)=>{setSelectedCity(event.target.value)}}>
+                            <option >Выберите город</option>
                             {cities.filter((city)=>city.countryId == selectedCountry)
                             .map((city) =>
                                 <option value={city.id}>{city.name}</option>

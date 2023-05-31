@@ -118,11 +118,11 @@ function Sign() {
                 if (response.ok) {
                     return response.text();
                 }
-                throw new Error('Неверные данные для регистрации (бэк)');
+                throw new Error('Неверные данные при регистрации (такой пользователь уже существует)');
             })
             .then(goteUserRegister => {
                 console.log(goteUserRegister);
-                alert(`Вы зарегестрировались!`);
+                alert(`Вы зарегестрировались! Для продолжения авторизируйтесь!`);
             })
             .catch((error) => {
                 alert(error.message);
@@ -167,7 +167,9 @@ function Sign() {
                             </div>
                             )}
                         </div>
-                        <form className="fsu form-signup-left" action="" method="post" name="form" onSubmit={componentRegister}>
+                        <div className="fsu form-signup-left">
+                        {!userStore[0] && (
+                        <form action="" method="post" name="form" onSubmit={componentRegister}>
                             <label className='indexLabel'>Full name</label>
                             <input className="form-styling" type="text" name="fullname" placeholder=""
                                 value={nameRegister} onChange={(e) => setNameRegister(e.target.value)} />
@@ -182,6 +184,13 @@ function Sign() {
                                 value={passwordRegister} onChange={(e) => setPasswordRegister(e.target.value)} />
                             <input className="btn-signup" type="submit" value="Sign up" />
                         </form>
+                        )}
+                        {userStore[0] && (
+                            <div className='divForSignUpButt'>
+                                <input className="btn-signout" type="button" value="Sign out" onClick={componentSignOut} />
+                            </div>
+                            )}
+                        </div>
 
                         <div className="success">
                             <div className="successtext">

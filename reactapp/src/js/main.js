@@ -1,48 +1,40 @@
 import Header from "../Header/header";
 import { Link } from 'react-router-dom';
 import '../css/main.css'
+import React, { useEffect, useState } from "react";
 
 function Main() {
 
-    var currentDate = new Date();
-    currentDate.setDate(currentDate.getDate());
-    var date = currentDate.toISOString().substring(0,10);
+    const [tours, setTours] = useState([]);
+
+    useEffect(() => {
+        fetch('http://127.0.0.1:5215/api/tour/getTours')
+            .then(response => response.json())
+            .then(tours => {
+                setTours(tours);
+            });
+    }, [])
+
+    if (!tours) return (
+        <>
+            <Header />
+            <div>No data</div>
+        </>
+    )
+
+
     return (
         <>
             <Header />
             <div className="mainSearching">
-                <h3 className="mainH3">Билеты на автобус</h3>
-                <div>
-                    <form className="mainForm" action="" method="post" name="form">
-                        <div className="mainDivFields">
-                            <div className="mainDivInput mainDivInputFloating">
-                                <select className="mainInput" name="list1">
-                                    <option>Куда</option>
-                                    <option>Финляндия</option>
-                                    <option>Швеция</option>
-                                    <option>Америка</option>
-                                </select>
-                                <label className="mainLabel" htmlFor="email">Тур</label>
-                            </div>
-                            <div className="mainDivInput mainDivInputFloating">
-                                <input className="mainInput" type="date" min={date}/>
-                                <label className="mainLabel" htmlFor="email">Дата</label>
-                            </div>
-                            <div className="mainDivInput mainDivInputFloating">
-                                <input className="mainInput" type="number" max={20} min={1} />
-                                <label className="mainLabel" htmlFor="email" >Число пассажиров</label>
-                            </div>
-                        </div>
-                        <div className="mainDivSubmit">
-                            <input className="mainSubmit" type="submit" value="Найти билеты" />
-                        </div>
-                    </form>
-                </div>
+                <h3 className="mainH3">Ассалам алейкум брат наша компания топ выбирай любые поездки и будешь счастлив брат. Для более подробной информации
+                переходи на вкладки туров брат, там есть всё шо захочешь брат. Хочешь узнать инфу про нас тыкай вкладку о нас брат. А ниже ты можешь поглазеть на 
+                самые пиздатые маршруты на последнее время брат</h3>
             </div>
             <hr />
             <div className="mainDivPopular">
                 <h2 className="mainH2">Популярные маршруты</h2>
-                <Link to='/tour' className="mainLink">
+                {/* <Link to='/tour' className="mainLink">
                     <div className="mainDivPreview">
                         <img className="mainImg" src='/images/tour1.jpg' />
                         <a className="mainImgA">Тур в италию</a>
@@ -59,7 +51,15 @@ function Main() {
                 <div className="mainDivPreview">
                     <img className="mainImg" src='/images/tour1.jpg' />
                     <a className="mainImgA">Тур в италию</a>
-                </div>
+                </div> */}
+                {tours.map((tour) =>
+                    <Link to={`/tour/${tour.id}`} className="toursLink">
+                        <div className="toursDivPreview">
+                            <a className="toursImgA">{tour.tourName}</a>
+                            <img className="toursImg" src='/images/tour1.jpg' />
+                        </div>
+                    </Link>
+                )}
             </div>
         </>
     );

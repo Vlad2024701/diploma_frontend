@@ -250,6 +250,10 @@ li {
   background-color: #1059FF;
 }
 
+.divForSignUpButt{
+  margin-top: 160px;
+}
+
 .btn-animate {
   float: left;
   font-weight: 700;
