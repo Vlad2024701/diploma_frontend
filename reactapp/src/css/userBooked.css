@@ -45,3 +45,19 @@
     text-decoration: none;
     color: #fff;
 }
+
+.userBookedLiId{
+    width:10px;
+}
+.userBookedLiTN{
+    width:300px;
+}
+.userBookedLiTS{
+    width:140px;
+}
+.userBookedLiTE{
+    width:140px;
+}
+.userBookedLiP{
+    width:200px;
+}

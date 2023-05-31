@@ -37,6 +37,7 @@ function App() {
           <Route path='/countriesDelete' element={<CountriesDelete/>}/>
           <Route path='/room' element={<Room/>}/>
           <Route path='/room/:id' element={<Room/>}/>
+          <Route path='/addTour' element/>
         </Routes>
       </div>
     </BrowserRouter>

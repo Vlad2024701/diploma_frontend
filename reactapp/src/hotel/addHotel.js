@@ -2,7 +2,7 @@ import Header from "../Header/header";
 import { Link } from 'react-router-dom';
 import '../css/booking.css'
 
-function Booking() {
+function addHotel() {
     return (
         <>
             <Header />
@@ -34,4 +34,4 @@ function Booking() {
     );
 }
 
-export default Booking;
+export default addHotel;

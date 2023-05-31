@@ -51,9 +51,10 @@ function CountriesDelete() {
             }
             throw new Error('Что-то пошло не так');
         })
-        .then(gotUser => {
-            console.log(gotUser);
+        .then(gotCity => {
+            console.log(gotCity);
             alert(`Город удален успешно!`);
+            setCities(cities.filter((city)=>city.id!=selectedCity));
         })
         .catch((error) => {
             alert(error.message);
@@ -77,6 +78,7 @@ function CountriesDelete() {
         .then(gotUser => {
             console.log(gotUser);
             alert(`Страна удалена успешно!`);
+            setCountry(countries.filter((country)=>country.id!=selectedCountry));
         })
         .catch((error) => {
             alert(error.message);
