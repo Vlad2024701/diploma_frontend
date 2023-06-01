@@ -42,7 +42,7 @@ function Hotels() {
                             <img className="hotelsImg" src='/images/tour1.jpg' />
                             
                             <a className="hotelsImgA">
-                                <a className="hotelsImgA">Город:</a> 
+                                <a className="hotelsImgA">Город: </a> 
                                 <a>
                                     {cities.length ? cities.find(item=>item.id == hotel.cityId).name : 'Loading'}
                                 </a>

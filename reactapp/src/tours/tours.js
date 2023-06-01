@@ -2,8 +2,12 @@ import Header from "../Header/header";
 import { Link } from 'react-router-dom';
 import '../css/tours.css'
 import React, { useEffect, useState } from "react";
+import { StoreContext } from "../utils/store";
 
 function Tours() {
+
+    const { userStore } = React.useContext(StoreContext);
+    const [user, setUser] = userStore;
 
     const [cities, setCities] = useState([]);
     useEffect(() => {
@@ -75,6 +79,11 @@ function Tours() {
                             </div>
                         </div>
                     </form>
+                    {user ? user.role =='admin' ? 
+                    <div>
+                        <button className="toursAddTourButton"><Link to={'/addTour'} className="toursAddTourLink"> Добавить тур</Link></button>
+                    </div>
+                    : '' : ''}
                 </div>
             </div>
             <div className="toursMainDiv">

@@ -1,8 +1,9 @@
 import Header from "../Header/header";
 import { Link } from 'react-router-dom';
-import '../css/booking.css'
+import '../css/booking.css';
+import React, { useEffect, useState } from "react";
 
-function addTour() {
+function AddTour() {
     return (
         <>
             <Header />
@@ -34,4 +35,4 @@ function addTour() {
     );
 }
 
-export default addTour;
+export default AddTour;

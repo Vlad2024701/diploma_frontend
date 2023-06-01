@@ -8,7 +8,7 @@ function Main() {
     const [tours, setTours] = useState([]);
 
     useEffect(() => {
-        fetch('http://127.0.0.1:5215/api/tour/getTours')
+        fetch('http://127.0.0.1:5215/api/tour/getPopularTours')
             .then(response => response.json())
             .then(tours => {
                 setTours(tours);

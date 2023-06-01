@@ -10,9 +10,9 @@ function User() {
     const [user, setUser] = userStore;
 
     const[login, setLogin] = useState(user.login); 
-    const[password, setPassword] = useState(""); 
-    const[username, setUsername] = useState(""); 
-    const[email, setEmail] = useState("");
+    const[password, setPassword] = useState(user.password); 
+    const[username, setUsername] = useState(user.name); 
+    const[email, setEmail] = useState(user.email);
     
     function componentUpdateUser(event) {
         event.preventDefault()

@@ -86,9 +86,12 @@ function Tour() {
                         Отель: {hotel ? hotel.name : 'Loading'}
                     </p>
                     <p className="tourP" align="justify">
-                        Предоставляемые комнаты: {hotel.rooms.map((item)=> item.name + `, `)}
+                        Предоставляемые номера отеля: {hotel ? hotel.rooms.map((item)=> item.name + `, `) : ''}
                     </p>
-                    <button className="tourBookedButton" type="button"><Link to='/booking' className="tourBookedLink">Забронировать</Link></button>
+                    <p className="tourP" align="justify">
+                        Количество мест: {tour ? tour.places.length : 0}
+                    </p>
+                    <button className="tourBookedButton" type="button"><Link to={`/booking/${tour.id}`} className="tourBookedLink">Забронировать</Link></button>
                     {/* <h1>{user.id}</h1> */}
                 </div>
             </div>

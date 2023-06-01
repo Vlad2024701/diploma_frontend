@@ -13,6 +13,7 @@ import CountriesDelete from '../countries/deleteCountry';
 import Hotels from '../hotels/hotels';
 import Hotel from '../hotel/hotel';
 import Room from '../room/room';
+import AddTour from '../tour/addTour';
 import { Route, BrowserRouter, Routes} from 'react-router-dom';
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path='/about' element={<About/>}/>
           <Route path='/tour' element={<Tour/>}/>
           <Route path='/booking' element={<Booking/>}/>
+          <Route path='/booking/:id' element={<Booking/>}/>
           <Route path='/tours' element={<Tours/>}/>
           <Route path='/countries' element={<Countries/>}/>
           <Route path='/hotels' element={<Hotels/>}/>
@@ -37,7 +39,7 @@ function App() {
           <Route path='/countriesDelete' element={<CountriesDelete/>}/>
           <Route path='/room' element={<Room/>}/>
           <Route path='/room/:id' element={<Room/>}/>
-          <Route path='/addTour' element/>
+          <Route path='/addTour' element={<AddTour/>}/>
         </Routes>
       </div>
     </BrowserRouter>
