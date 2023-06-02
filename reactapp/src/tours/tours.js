@@ -92,7 +92,7 @@ function Tours() {
                     <Link to={`/tour/${tour.id}`} className="toursLink">
                         <div className="toursDivPreview">
                             <a className="toursImgA">{tour.tourName}</a>
-                            <img className="toursImg" src='/images/tour1.jpg' />
+                            <img className="toursImg" src={tour.imageURL} />
                             <a className="toursImgA">
                                 <a className="toursImgA">Даты:</a>
                                 <a> С {tour.tourTimeStart.substring(0, 10)} по {tour.tourTimeEnd.substring(0, 10)}</a>

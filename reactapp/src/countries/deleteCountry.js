@@ -79,6 +79,7 @@ function CountriesDelete() {
             console.log(gotUser);
             alert(`Страна удалена успешно!`);
             setCountry(countries.filter((country)=>country.id!=selectedCountry));
+            setCities([]);
         })
         .catch((error) => {
             alert(error.message);

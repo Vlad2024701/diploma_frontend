@@ -14,6 +14,8 @@ import Hotels from '../hotels/hotels';
 import Hotel from '../hotel/hotel';
 import Room from '../room/room';
 import AddTour from '../tour/addTour';
+import AddHotel from '../hotel/addHotel';
+import AddRoom from '../room/addRoom';
 import { Route, BrowserRouter, Routes} from 'react-router-dom';
 
 function App() {
@@ -40,6 +42,9 @@ function App() {
           <Route path='/room' element={<Room/>}/>
           <Route path='/room/:id' element={<Room/>}/>
           <Route path='/addTour' element={<AddTour/>}/>
+          <Route path='/' element={<Main/>}/>
+          <Route path='/addHotel' element= {<AddHotel/>}/>
+          <Route path='/addRoom' element= {<AddRoom/>}/>
         </Routes>
       </div>
     </BrowserRouter>

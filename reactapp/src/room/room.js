@@ -38,7 +38,7 @@ function Room() {
             <div className="hotelMainDiv">
                 <div className="hotelInfoDiv">
                     <h2 className="hotelInfoH2">{room.name}</h2>
-                    <img className="hotelInfoImg" src="/images/about1.jpg" />
+                    <img className="hotelInfoImg" src={room.imageURL} />
                 </div>
                 <p className="hotelP" align="justify">В данном номере постояльцем предоставляется {room.numberOfGuests} спальных мест.</p>
                 <p className="hotelP" align="justify">Здание отеля представляет из себя {room.hotelBuilding} с видом из окна {room.windowView}</p>

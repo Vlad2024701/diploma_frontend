@@ -42,6 +42,7 @@ function Tour() {
             .then(response => response.json())
             .then(hotel => {
                 console.log(hotel);
+                console.log(user.role)
                 setHotel(hotel);
             });
         }
@@ -61,13 +62,38 @@ function Tour() {
             <div>No data</div>
         </>
     )
+    function componentDeleteTour(event) {
+        event.preventDefault()
+        console.log(tour?.id);
+        fetch(`http://localhost:5215/api/tour/${tour?.id}/deleteTour`,
+        {
+                method: 'DELETE',
+                headers: {"Content-Type": "application/json"}
+        })
+        .then((response) => {
+            if (response.ok) {
+                return response.text();
+            }
+            throw new Error('Что-то пошло не так');
+        })
+        .then(gotUser => {
+            alert(`Тур успешно удален`);
+        })
+        .catch((error) => {
+            alert(error.message);
+        });
+    }
+
     return (
         <>
             <Header />
             <div className="tourMainDiv">
                 <div className="tourDivInfo">
+                {user ? user.role =='admin' ? 
+                        <button className="tourBookedButton" type="button" onClick={componentDeleteTour}>Удалить тур</button>
+                    : '' : ''}
                 <div className="tourDivImage">
-                    <img className="tourImage" src='/images/tours/italy.jpg' />
+                    <img className="tourImage" src={tour.imageURL} />
                 </div>
                     <h2 className="tourH2">{tour ? tour.tourName : 'Loading'}</h2>
                     <p className="tourP" align="justify">
@@ -93,7 +119,10 @@ function Tour() {
                     </p>
                     <button className="tourBookedButton" type="button"><Link to={`/booking/${tour.id}`} className="tourBookedLink">Забронировать</Link></button>
                     {/* <h1>{user.id}</h1> */}
+
+                <button className="tourBookedButton" type="button"><Link to='javascript:history.back()' className="roomLink">Назад</Link></button>
                 </div>
+
             </div>
         </>
     );

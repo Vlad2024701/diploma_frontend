@@ -56,7 +56,7 @@ function User() {
                     <label className="userLabel">Email</label>
                     <input className="userInput" type="text" placeholder={user.email}
                     value={email} onChange={(e)=>setEmail(e.target.value)}/>
-                    <input className="userSubmit" type="submit" value="Редактировать"/>
+                    <input className="userSubmit" type="submit" value="Редактировать" disabled={!login || !password}/>
                 </form>
                 <button className="userBookings" type="button"><Link to='/userBooked' className="userLink">Бронирования</Link></button>
             </div>

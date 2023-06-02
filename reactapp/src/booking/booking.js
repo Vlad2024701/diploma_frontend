@@ -10,19 +10,30 @@ function Booking() {
     const [user, setUser] = userStore;
     const [email, setEmail] = useState(user.email);
     const [placesCount, setPlacesCount] = useState(1);
+    const [rooms, setRooms] = useState([]);
     const [selectedRoom, setSelectedRoom] = useState(user.email);
+    const [tour, setTour] = useState(null);
 
     useEffect(() => {
-        fetch('http://127.0.0.1:5215/api/city/getCities')
+        if(tour){
+        fetch(`http://127.0.0.1:5215/api/room/${tour?.hotelId}/getRoomByHotelId`,
+        {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        })
             .then(response => response.json())
-            .then(selectedRoom => {
-                setSelectedRoom(selectedRoom);
+            .then(rooms => {
+                console.log(rooms);
+                setRooms(rooms);
             });
-    }, [])
+        }
+    }, [tour])
 
     const { id } = useParams();
 
-    const [tour, setTour] = useState(null);
     useEffect(() => {
         fetch(`http://127.0.0.1:5215/api/tour/GetTour?id=${id}`,
             {
@@ -61,23 +72,22 @@ function Booking() {
 
     function componentAddBooking(event) {
         event.preventDefault()
-        console.log();
-        fetch(`http://localhost:5215/api/user/${user.id}/updateUser`,
+        console.log(tour.id, selectedRoom, user.id, placesCount);
+        fetch(`http://localhost:5215/api/ticket/AddTicket`,
             {
-                method: 'PUT',
+                method: 'POST',
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ tourId: tour.Id, placesCount: placesCount })
+                body: JSON.stringify({ tourId: tour.id, placesCount: +placesCount, roomId: +selectedRoom, userId: user.id})
             })
             .then((response) => {
                 if (response.ok) {
-                    return response.text();
+                    return response.json();
                 }
                 throw new Error('Неверные данные');
             })
-            .then(gotUser => {
-                console.log(gotUser);
-                alert(`Вы обновили информацию об аккаунте`);
-                userStore[1](JSON.parse(gotUser));
+            .then(gotTicket => {
+                console.log(gotTicket);
+                alert(`Вы забронировали билет, информация о бронированиях в личном кабинете`);
             })
             .catch((error) => {
                 alert(error.message);
@@ -86,7 +96,7 @@ function Booking() {
 
 
     //либо так ошибку эвэйд либо tour && tour.tourName
-    if (!hotel || !tour) return (
+    if (!hotel || !tour || !rooms) return (
         <>
             <Header />
             <div>No data</div>
@@ -96,21 +106,22 @@ function Booking() {
         <>
             <Header />
             <div className="bookingMainDiv">
-                <form action="" method="post" name="form" className="bookingForm">
+                <form action="" method="post" name="form" className="bookingForm" onSubmit={componentAddBooking}>
                     <label className="bookingLabel">Подтверждение почты</label>
                     <input className="bookingInput" type="text" placeholder={user.email}
                         value={email} onChange={(e) => setEmail(e.target.value)} />
-                    <label className="bookingLabel">Количество пассажиров</label>
+                    <label className="bookingLabel">Номер</label>
                     <select className="bookingInput" name="list1"
                         onChange={(event) => { event.target.value == -1 ? setSelectedRoom(null) : setSelectedRoom(event.target.value) }}>
-                        <option value={-1}>Куда</option>
-                        {selectedRoom.map((room) => <option value={room.id}>{room.name}</option>)};
+                        <option value={-1}>Выберите тип номера</option>
+                        {rooms ? rooms.map((room) => <option value={room.id}>{room.name}</option> ) : ''};
                     </select>
+                    <label className="bookingLabel">Количество пассажиров</label>
                     <input className="bookingInput" type="number" max={tour.places.length} min={1} placeholder="1"
                         value={placesCount} onChange={(e) => setPlacesCount(e.target.value)} />
                     <label className="bookingLabel">Дата отправки</label>
                     <input className="bookingInput" type="text" placeholder="date" disabled='true'
-                        value={tour.tourTimeStart.substring(0, 10)} />
+                        value={tour.tourTimeStart.substring(0, 10) + ` в ` + tour.departureTime} />
                     <label className="bookingLabel">Дата прибытия</label>
                     <input className="bookingInput" type="text" placeholder="date" disabled='true'
                         value={tour.tourTimeEnd.substring(0, 10)} />

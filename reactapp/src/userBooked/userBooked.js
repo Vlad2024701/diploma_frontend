@@ -9,10 +9,6 @@ function UserBooked() {
     const { userStore } = React.useContext(StoreContext);
     const [user, setUser] = userStore;
 
-    const [login, setLogin] = useState("");
-    const [password, setPassword] = useState("");
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
 
     const [tickets, setTickets] = useState([]);
     useEffect(() => {
