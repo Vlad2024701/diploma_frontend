@@ -7,12 +7,24 @@ import { computeHeadingLevel } from "@testing-library/react";
 function AddHotel() {
     const [imageFile, setFile] = useState();
     const [imageURL, setImageURL] = useState();
+    const [base64Image, setBase64Image] = useState();
+
     const getImage = (e) => {
-        console.log(URL.createObjectURL(e.target.files[0]));
-        console.log(e.target.files[0]);
         setFile(e.target.files[0]);
-        setImageURL(URL.createObjectURL(e.target.files[0]));
     }
+    useEffect(() => {
+        if(imageFile){
+            var reader = new FileReader();
+            console.log(imageFile);
+            reader.readAsDataURL(imageFile);
+            reader.onload = function () {
+                var base64data = reader.result;
+                console.log(base64data);
+                setBase64Image(base64data);
+            }
+        }
+    }, [imageFile])
+
 
     function addTour(event){
         event.preventDefault();
@@ -20,7 +32,7 @@ function AddHotel() {
         fetch(`http://127.0.0.1:5215/api/hotel/AddHotel`, {
             method: "POST",
             headers: { "Content-Type": "application/json"},
-            body: JSON.stringify({imageURL: imageURL,
+            body: JSON.stringify({imageURL: base64Image,
                  name: hotelName, 
                  hotelDescription: hotelDescription,
                  cityId: +selectedCity})

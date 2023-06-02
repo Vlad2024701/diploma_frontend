@@ -6,41 +6,52 @@ import { computeHeadingLevel } from "@testing-library/react";
 
 function AddRoom() {
     const [imageFile, setFile] = useState();
-    const [imageURL, setImageURL] = useState();
-    const getImage = (e) => {
-        console.log(URL.createObjectURL(e.target.files[0]));
-        console.log(e.target.files[0]);
-        setFile(e.target.files[0]);
-        setImageURL(URL.createObjectURL(e.target.files[0]));
-    }
+    const [base64Image, setBase64Image] = useState();
 
-    function addTour(event){
+    const getImage = (e) => {
+        setFile(e.target.files[0]);
+    }
+    useEffect(() => {
+        if(imageFile){
+            var reader = new FileReader();
+            console.log(imageFile);
+            reader.readAsDataURL(imageFile);
+            reader.onload = function () {
+                var base64data = reader.result;
+                console.log(base64data);
+                setBase64Image(base64data);
+            }
+        }
+    }, [imageFile])
+
+    function addTour(event) {
         event.preventDefault();
         console.log(URL.createObjectURL(imageFile), roomName, selectedHotel);
         fetch(`http://127.0.0.1:5215/api/room/AddRoom`, {
             method: "POST",
-            headers: { "Content-Type": "application/json"},
-            body: JSON.stringify({imageURL: imageURL,
-                 name: roomName, 
-                 numberOfGuests: +numberOfGuests,
-                 hotelBuilding: hotelBuilding,
-                 windowView: windowView,
-                 hotelId: +selectedHotel
-                })
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                imageURL: base64Image,
+                name: roomName,
+                numberOfGuests: +numberOfGuests,
+                hotelBuilding: hotelBuilding,
+                windowView: windowView,
+                hotelId: +selectedHotel
+            })
         })
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error('Заполните все поля');
-        })
-        .then(gotTour => {
-            console.log(gotTour);
-            alert(`Номер успешно добавлен!`);
-        })
-        .catch((error) => {
-            alert(error.message);
-        });
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Заполните все поля');
+            })
+            .then(gotTour => {
+                console.log(gotTour);
+                alert(`Номер успешно добавлен!`);
+            })
+            .catch((error) => {
+                alert(error.message);
+            });
     }
 
     const [selectedHotel, setSelectedHotel] = useState(null);
@@ -86,17 +97,17 @@ function AddRoom() {
 
                     <label className="bookingLabel">Номер</label>
                     <input className="bookingInput" type="text" placeholder="Однокомнатный люкс"
-                    value={roomName} onChange={(e)=>setRoomName(e.target.value)}/>
+                        value={roomName} onChange={(e) => setRoomName(e.target.value)} />
                     <label className="bookingLabel">Максимальное количество гостей</label>
                     <input className="bookingInput" type="number" placeholder="2"
-                    value={numberOfGuests} onChange={(e)=>setNumberOfGuests(e.target.value)}/>
+                        value={numberOfGuests} onChange={(e) => setNumberOfGuests(e.target.value)} />
                     <label className="bookingLabel">Тип комнаты</label>
                     <input className="bookingInput" type="text" placeholder="Бунгало"
-                    value={hotelBuilding} onChange={(e)=>setHotelBuilding(e.target.value)}/>
+                        value={hotelBuilding} onChange={(e) => setHotelBuilding(e.target.value)} />
                     <label className="bookingLabel">Вид из окна</label>
                     <input className="bookingInput" type="text" placeholder="На море"
-                    value={windowView} onChange={(e)=>setWindowView(e.target.value)}/>
-                    <input className="bookingSubmit" type="submit" value="Добавить комнату"/>
+                        value={windowView} onChange={(e) => setWindowView(e.target.value)} />
+                    <input className="bookingSubmit" type="submit" value="Добавить комнату" />
                     <button className="bookingBack" type="button">
                         <Link to='/userBooked' className="bookingLink">Назад</Link>
                     </button>
